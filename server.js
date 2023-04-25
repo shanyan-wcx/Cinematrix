@@ -503,5 +503,5 @@ function matchMetadata(dir, title) {
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
-   console.log(`服务运行在：http://localhost:${port}`);
+   console.log(`服务运行在：http://localhost:${port}，请在浏览器中打开该地址。`);
 });
