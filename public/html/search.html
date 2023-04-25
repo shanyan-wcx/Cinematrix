@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cinematrix - 搜索</title>
+    <link rel="icon" type="image/png" href="../icon/video.png">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/search.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h1>Cinematrix</h1>
+        <ul>
+            <li><a href="/" id="home">首页</a></li>
+            <li><a href="#" id="create">创建媒体库</a></li>
+            <li><a href="/search" id="search">搜索</a></li>
+            <li><a href="/config" id="config">设置</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>搜索</h1>
+        <form name="search-form">
+            <div class="form-group" id="qb_config">
+                <label for="title">标题</label>
+                <input type="text" id="title" name="title" class="form-control" />
+                &nbsp;&nbsp;
+                <label for="year">年份</label>
+                <input type="text" id="year" name="year" class="form-control" />
+                &nbsp;&nbsp;
+                <label for="savepath">保存路径</label>
+                <input type="text" id="savepath" name="savepath" class="form-control" />
+                &nbsp;&nbsp;
+                <label for="category">分类</label>
+                <select id="category" name="category" class="form-control">
+                    <option value="Movie">电影</option>
+                    <option value="TV show">剧集</option>
+                </select>
+                &nbsp;&nbsp;
+                <label for="quality">分辨率</label>
+                <select id="quality" name="quality" class="form-control">
+                    <option value=""></option>
+                    <option value="2160p">2160p</option>
+                    <option value="1080p">1080p</option>
+                    <option value="720p">720p</option>
+                    <option value="480p">480p</option>
+                </select>
+                &nbsp;&nbsp;
+                <label for="source">质量</label>
+                <select id="source" name="source" class="form-control">
+                    <option value=""></option>
+                    <option value="BluRay">BluRay</option>
+                    <option value="Remux">Remux</option>
+                    <option value="BDrip">BDrip</option>
+                    <option value="Web">Web</option>
+                    <option value="UHD">UHD</option>
+                    <option value="HDTV">HDTV</option>
+                    <option value="3D">3D</option>
+                </select>
+                &nbsp;&nbsp;
+                <label for="HDR">HDR</label>
+                <select id="HDR" name="HDR" class="form-control">
+                    <option value="false">不包含</option>
+                    <option value="true">包含</option>
+                </select>
+            </div>
+            <button id="search-btn">搜索</button>
+        </form>
+        <div class="result-container">
+            <textarea class="form-control" id="textarea" rows="5" readonly></textarea>
+        </div>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <label for="media-library-name">媒体库名称：</label>
+            <input type="text" id="media-library-name" name="media-library-name"><br><br>
+            <label for="media-library-path">媒体库目录：</label>
+            <input type="text" id="media-library-path" name="media-library-path"><br><br>
+            <button id="create-media-library">确认</button>
+            <button id="cancel-media-library">取消</button>
+        </div>
+    </div>
+    <script src="../javascript/base.js"></script>
+    <script src="../javascript/search.js"></script>
+</body>
+
+</html>

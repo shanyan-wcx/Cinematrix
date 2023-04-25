@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cinematrix - 媒体库</title>
+    <link rel="icon" type="image/png" href="../icon/video.png">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/library.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h1>Cinematrix</h1>
+        <ul>
+            <li><a href="/" id="home">首页</a></li>
+            <li><a href="#" id="create">创建媒体库</a></li>
+            <li><a href="/search" id="search">搜索</a></li>
+            <li><a href="/config" id="config">设置</a></li>
+        </ul>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <label for="media-library-name">媒体库名称：</label>
+            <input type="text" id="media-library-name" name="media-library-name"><br><br>
+            <label for="media-library-path">媒体库目录：</label>
+            <input type="text" id="media-library-path" name="media-library-path"><br><br>
+            <button id="create-media-library">确认</button>
+            <button id="cancel-media-library">取消</button>
+        </div>
+    </div>
+    <div class="content">
+        <h1>媒体库</h1>
+        <div class="nothing">
+        <p style="display: none;">这里没有可显示的内容。</p>
+        </div>
+    </div>
+    <div class="poster-wall" id="posterWall"></div>
+    <script src="../javascript/base.js"></script>
+    <script src="../javascript/library.js"></script>
+</body>
+
+</html>

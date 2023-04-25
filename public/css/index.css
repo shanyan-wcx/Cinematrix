@@ -1,0 +1,118 @@
+.library-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+    width: 100%-320px;
+    margin-left: 290px;
+    margin-right: 50px;
+    margin-bottom: 0;
+    height: 420px;
+}
+
+.library-container .poster-container {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    margin: 12px;
+    padding: 0;
+    overflow-x: auto;
+    height: 360px;
+    align-items: center;
+    margin-bottom: 0;
+    overflow: hidden;
+}
+
+.library-container .poster {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 0;
+}
+
+.library-container .poster:hover .poster-img {
+    opacity: 0.7;
+    box-shadow: 0px 0px 10px #888888;
+    cursor: pointer;
+}
+
+.library-container .poster-img {
+    width: 200px;
+    height: 300px;
+    border-radius: 10px;
+    margin: 0;
+    padding: 0;
+    object-fit: cover;
+    object-position: center;
+    transition: opacity 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.library-container .title {
+    position: relative;
+    justify-content: center;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: text-decoration 0.3s ease-in-out;
+}
+
+.library-container .title:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.library-title {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.libraryName {
+    font-size: 26px;
+    font-weight: bold;
+    margin-top: 40px;
+    margin-bottom: -10px;
+    margin-left: 20px;
+}
+
+.libraryName:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+span {
+    flex-grow: 1;
+}
+
+button {
+    margin-top: 46px;
+    margin-right: 10px;
+    margin-bottom: 0;
+    border: none;
+    background-color: #E6E6E6;
+    color: #4d5168;
+    z-index: 9999;
+}
+
+button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
+.scroll-left {
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+}
+
+.scroll-right {
+    width: 25px;
+    height: 25px;
+    border-radius: 3px;
+}

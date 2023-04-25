@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cinematrix - 设置</title>
+    <link rel="icon" type="image/png" href="../icon/video.png">
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/config.css">
+</head>
+
+<body>
+    <div class="sidebar">
+        <h1>Cinematrix</h1>
+        <ul>
+            <li><a href="/" id="home">首页</a></li>
+            <li><a href="#" id="create">创建媒体库</a></li>
+            <li><a href="/search" id="search">搜索</a></li>
+            <li><a href="/config" id="config">设置</a></li>
+        </ul>
+    </div>
+    <div class="container">
+        <h1>设置</h1>
+        <form name="settings-form">
+            <fieldset>
+                <legend>API令牌</legend>
+                <div class="form-group" id="api_token">
+                    <label for="MyAPIFilms_token">MyAPIFilms令牌</label>
+                    <input type="text" id="MyAPIFilms_token" name="myapi_token" class="form-control" />
+                    <label for="assrt_token">Assrt令牌</label>
+                    <input type="text" id="assrt_token" name="assrt_token" class="form-control" />
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>qBittorrent设置</legend>
+                <div class="form-group" id="qb_config">
+                    <label for="qb_host">qBittorrent地址</label>
+                    <input type="text" id="qb_host" name="qb_host" class="form-control" />
+                    <label for="qb_username">qBittorrent用户名</label>
+                    <input type="text" id="qb_username" name="qb_username" class="form-control" />
+                    <label for="qb_password">qBittorrent密码</label>
+                    <input type="password" id="qb_password" name="qb_password" class="form-control" />
+                    <label for="qb_savepath">qBittorrent保存路径</label>
+                    <input type="text" id="qb_savepath" name="qb_savepath" class="form-control" />
+                    <label for="qb_category">qBittorrent分类</label>
+                    <input type="text" id="qb_category" name="qb_category" class="form-control" />
+                    <label for="qb_tags">qBittorrent标签</label>
+                    <input type="text" id="qb_tags" name="qb_tags" class="form-control" />
+                </div>
+            </fieldset>
+            <button id="save-btn">保存</button>
+        </form>
+    </div>
+    <div class="modal">
+        <div class="modal-content">
+            <label for="media-library-name">媒体库名称：</label>
+            <input type="text" id="media-library-name" name="media-library-name"><br><br>
+            <label for="media-library-path">媒体库目录：</label>
+            <input type="text" id="media-library-path" name="media-library-path"><br><br>
+            <button id="create-media-library">确认</button>
+            <button id="cancel-media-library">取消</button>
+        </div>
+    </div>
+    <script src="../javascript/base.js"></script>
+    <script src="../javascript/config.js"></script>
+</body>
+
+</html>
