@@ -3,22 +3,14 @@ const cheerio = require('cheerio');
 const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
+const { qBittorrentClient } = require('@robertklep/qbittorrent')
 const functions = require('./functions');
 
 const app = express();
-const CONFIG_FILE = 'config.json';
-const config = JSON.parse(fs.readFileSync(CONFIG_FILE));
 const osPlatform = process.platform;
+const CONFIG_FILE = path.join(__dirname, 'config.json');
 const videoPath = './videos';
 
-var MyAPIFilms_token = config.MyAPIFilms_token;
-var assrt_token = config.assrt_token;
-var qb_host = config.qb_host;
-var qb_username = config.qb_username;
-var qb_password = config.qb_password;
-var qb_savepath = path.join(__dirname, 'videos', config.qb_savepath);
-var qb_category = config.qb_category;
-var qb_tags = config.qb_tags;
 var open_command = '';
 var info = {};
 var searchList = [];
@@ -87,14 +79,32 @@ app.post('/search-data', async (req, res) => {
    var quality = req.body.quality;
    var source = req.body.source;
    var HDR = req.body.HDR === 'true';
-   if (!searchList.includes(title)) {
+   var config = JSON.parse(fs.readFileSync(CONFIG_FILE));
+   var MyAPIFilms_token = config.MyAPIFilms_token;
+   var Assrt_token = config.Assrt_token;
+   var qb_host = config.qb_host;
+   var qb_username = config.qb_username;
+   var qb_password = config.qb_password;
+   var qb_savepath = path.join(__dirname, 'videos', config.qb_savepath);
+   var qb_category = config.qb_category;
+   var qb_tags = config.qb_tags;
+   if (MyAPIFilms_token === '') {
+      console.log('未配置MyAPIFilms令牌，请先到设置页进行配置。');
+      fs.writeFileSync(path.join(__dirname, 'console.log'), '未配置MyAPIFilms_token，请先到设置页进行配置。' + '\n');
+   } else if (Assrt_token === '') {
+      console.log('未配置Assrt令牌，请先到设置页进行配置。');
+      fs.writeFileSync(path.join(__dirname, 'console.log'), '未配置Assrt_token，请先到设置页进行配置。' + '\n');
+   } else if (qb_host === '') {
+      console.log('未配置qBittorrent地址，请先到设置页进行配置。');
+      fs.writeFileSync(path.join(__dirname, 'console.log'), '未配置qb_host，请先到设置页进行配置。' + '\n');
+   } else if (!searchList.includes(title)) {
       console.log('搜索开始。');
       fs.writeFileSync(path.join(__dirname, 'console.log'), '搜索开始。' + '\n');
       await searchList.push(title);
-      await main(title, year, savepath, category, quality, source, HDR);
+      await main(title, year, savepath, category, quality, source, HDR, qb_host, qb_username, qb_password, qb_savepath, qb_category, qb_tags, MyAPIFilms_token, Assrt_token);
       await searchList.splice(searchList.indexOf(title), 1);
       res.send('搜索完毕');
-   } else {
+   } else if (searchList.includes(title)) {
       console.log('已在搜索队列中，请勿重复搜索。')
       fs.appendFileSync(path.join(__dirname, 'console.log'), '已在搜索队列中，请勿重复搜索。' + '\n');
       res.send('重复搜索');
@@ -251,7 +261,7 @@ app.get('/library-data', (req, res) => {
 });
 
 // 获取数据函数
-async function getData(title, year, category, quality, source, HDR) {
+async function getData(title, year, category, quality, source, HDR, MyAPIFilms_token) {
    try {
       var imdbid = await functions.searchId(title, category);
       console.log('获取IMDBID：' + imdbid);
@@ -370,9 +380,9 @@ async function traverseDir(dirPath, videos) {
    }
 }
 
-async function main(title, year, savepath, category, quality, source, HDR,) {
+async function main(title, year, savepath, category, quality, source, HDR, qb_host, qb_username, qb_password, qb_savepath, qb_category, qb_tags, MyAPIFilms_token, Assrt_token) {
    try {
-      var data = await getData(title, year, category, quality, source, HDR);
+      var data = await getData(title, year, category, quality, source, HDR, MyAPIFilms_token);
       var magnet = data[0].magnet
       var hash = magnet.slice(20, 60)
       try {
@@ -385,12 +395,17 @@ async function main(title, year, savepath, category, quality, source, HDR,) {
          if (category === '') {
             category = qb_category;
          }
-         var downloadState = await functions.downloadTorrent(magnet, hash, qbSavepath, category, qb_tags);
+         const client = new qBittorrentClient(qb_host, qb_username, qb_password);
+         var downloadState = await functions.downloadTorrent(client, magnet, hash, qbSavepath, category, qb_tags);
          if (downloadState) {
             try {
                console.log('储存削挂信息中...')
                fs.appendFileSync(path.join(__dirname, 'console.log'), '储存削挂信息中...' + '\n');
                var dirPath = '';
+               try {
+                  fs.mkdirSync(qbSavepath);
+               } catch (error) {
+               }
                const watcher = fs.watch(qbSavepath, async (eventType, filename) => {
                   if (eventType === 'rename' && fs.statSync(qbSavepath + '/' + filename).isDirectory()) {
                      dirPath = path.join(qbSavepath, filename);
@@ -445,7 +460,7 @@ async function main(title, year, savepath, category, quality, source, HDR,) {
                      try {
                         console.log('开始搜索字幕...')
                         fs.appendFileSync(path.join(__dirname, 'console.log'), '开始搜索字幕...' + '\n');
-                        var sub_links = await functions.findSub(title, year, assrt_token);
+                        var sub_links = await functions.findSub(title, year, Assrt_token);
                         if (sub_links.length == 0) {
                            throw new Error('没有找到字幕。')
                         }

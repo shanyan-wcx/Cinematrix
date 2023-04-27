@@ -4,23 +4,23 @@ const download = require('download')
 const request = require('sync-request')
 const nameToImdb = require("name-to-imdb")
 const { search, defaultProviders } = require('torrent-browse')
-const { qBittorrentClient } = require('@robertklep/qbittorrent')
-const config = require('./config');
+// const { qBittorrentClient } = require('@robertklep/qbittorrent')
+// const config = require('./config');
 
-var MyAPIFilms_token = config.MyAPIFilms_token
-var assrt_token = config.assrt_token
-var qb_host = config.qb_host
-var qb_username = config.qb_username
-var qb_password = config.qb_password
-var qb_savepath = path.join(__dirname, 'videos' + config.qb_savepath);
-var qb_category = config.qb_category
-var qb_tags = config.qb_tags
+// var MyAPIFilms_token = config.MyAPIFilms_token
+// var Assrt_token = config.Assrt_token
+// var qb_host = config.qb_host
+// var qb_username = config.qb_username
+// var qb_password = config.qb_password
+// var qb_savepath = path.join(__dirname, 'videos' + config.qb_savepath);
+// var qb_category = config.qb_category
+// var qb_tags = config.qb_tags
 
-const client = new qBittorrentClient(qb_host, qb_username, qb_password)
+// const client = new qBittorrentClient(qb_host, qb_username, qb_password);
 
 async function getTorrents(imdbid, category) {
-    if(category == 'Movie'){
-        var TPB_category ='HD - Movies'
+    if (category == 'Movie') {
+        var TPB_category = 'HD - Movies'
     } else {
         var TPB_category = 'HD - TV shows'
     }
@@ -70,7 +70,7 @@ async function torrentSort(a, b) {
     }
 }
 
-async function downloadTorrent(magnet, hash, qb_savepath, qb_category, qb_tags) {
+async function downloadTorrent(client, magnet, hash, qb_savepath, qb_category, qb_tags) {
     try {
         const res = await client.torrents.add(
             {
@@ -90,15 +90,15 @@ async function downloadTorrent(magnet, hash, qb_savepath, qb_category, qb_tags) 
     }
 }
 
-async function findSub(title, year, assrt_token) {
+async function findSub(title, year, Assrt_token) {
     title = encodeURI(title + ' ' + year)
-    var res = request('GET', `https://api.assrt.net/v1/sub/search?token=${assrt_token}&q=${title}`)
+    var res = request('GET', `https://api.assrt.net/v1/sub/search?token=${Assrt_token}&q=${title}`)
     var subs = JSON.parse(res.getBody()).sub.subs
     var sub_links = []
     for (i in subs) {
         var sub_id = subs[i].id
         try {
-            var res = request('GET', `https://api.assrt.net/v1/sub/detail?token=${assrt_token}&id=${sub_id}`)
+            var res = request('GET', `https://api.assrt.net/v1/sub/detail?token=${Assrt_token}&id=${sub_id}`)
             var sub_detail = JSON.parse(res.getBody()).sub.subs[0]
             if (sub_detail.lang.langlist.langchs) {
                 for (i in sub_detail.filelist) {

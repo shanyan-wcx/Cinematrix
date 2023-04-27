@@ -2,7 +2,7 @@ function fetchData() {
     fetch('/library-data')
         .then(response => response.json())
         .then(data => {
-            if(data.length !== undefined) {
+            if (Object.keys(data).length !== 0) {
                 for (i in data) {
                     if (data[i].videos.length !== 0) {
                         const libraryContainer = document.createElement("div");

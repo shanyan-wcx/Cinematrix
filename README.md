@@ -39,7 +39,7 @@ npm start
 ```json
 {
     "MyAPIFilms_token": "",
-    "assrt_token": "",
+    "Assrt_token": "",
     "qb_host": "",
     "qb_username": "",
     "qb_password": "",
@@ -49,11 +49,11 @@ npm start
 }
 ```
 
-可以在网页中配置，也可以直接修改配置文件。其中，`MyAPIFilms_token`、`assrt_token`和`qb_host`为必需选项。
+可以在网页中配置，也可以直接修改配置文件。其中，`MyAPIFilms_token`、`Assrt_token`和`qb_host`为必需选项。
 
-`MyAPIFilms_token`请到[MyAPIFilms](https://www.myapifilms.com/)获取。
+`MyAPIFilms_token`请到[MyAPIFilms](https://www.myapifilms.com/)获取令牌。
 
-`assrt_token`请到[Assrt.net](https://assrt.net/)获取。
+`Assrt_token`请到[Assrt.net](https://assrt.net/)获取令牌。
 
 `qb_host`为本地qBittorrent地址。
 
