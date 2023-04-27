@@ -116,3 +116,10 @@ button:hover {
     height: 25px;
     border-radius: 3px;
 }
+
+.nothing p {
+    font-size: 32px;
+    margin-left: 240px;
+    margin-top: 280px;
+    text-align: center;
+}

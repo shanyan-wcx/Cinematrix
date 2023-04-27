@@ -35,7 +35,6 @@ function fetchData() {
             } else {
                 document.querySelector('.content').querySelector('p').style.display = 'block';
             }
-
         })
         .catch(error => console.error(error));
 }
