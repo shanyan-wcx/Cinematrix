@@ -61,4 +61,4 @@ npm start
 
 > 注意：当前仅支持使用本地qBittorrent作为下载器。
 
-启动Cinematrix前，应当先打开qBittorrent，并在设置中启用Web UI功能。若启用了Web UI登陆验证，需在启动Cinematrix后转到设置页配置qBittorrent用户名和密码。
+启动Cinematrix前，应当先打开qBittorrent，并在设置中启用Web UI功能。若启用了Web UI登陆验证，需配置qBittorrent用户名和密码。
