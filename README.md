@@ -55,7 +55,7 @@ npm start
 
 `Assrt_token`请到[Assrt.net](https://assrt.net/)获取令牌。
 
-`qb_host`为本地qBittorrent地址。
+`qb_host`为本地qBittorrent的Web UI地址。
 
 # 下载
 
